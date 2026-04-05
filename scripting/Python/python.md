@@ -1,6 +1,5 @@
-# Python
-> Manual de Introducción al Lenguaje de Programación Python  
-> Autor: Sergio Delgado Quintero
+# Manual de Python
+
 
 ---
 

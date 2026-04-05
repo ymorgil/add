@@ -1,22 +1,12 @@
+---
+title: "bash [Programación]"
+weight: 2
+---
 
-# :cyclone: 1. Bash
+## Índice
 
-- [:cyclone: 1. Bash](#cyclone-1-bash)
-    - [Pasos para crear un script](#pasos-para-crear-un-script)
-      - [**Buenas prácticas y recomendaciones para Bash**](#buenas-prácticas-y-recomendaciones-para-bash)
-    - [Aplicaciones](#aplicaciones)
-- [:cyclone: 2. Variables](#cyclone-2-variables)
-    - [Reglas básicas](#reglas-básicas)
-    - [Comillas](#comillas)
-    - [Tipos de datos (ejemplos en Python)](#tipos-de-datos-ejemplos-en-python)
-- [:cyclone:  3. Operaciones Básicas](#cyclone--3-operaciones-básicas)
-- [:cyclone:  4. Estructuras de Control](#cyclone--4-estructuras-de-control)
-    - [🔹  Secuencial](#--secuencial)
-    - [🔹 Condicional (if-else)](#-condicional-if-else)
-    - [🔹  Condicional (if-elif-else)](#--condicional-if-elif-else)
-    - [🔹 Estructura case](#-estructura-case)
-    - [🔹  Bucle for](#--bucle-for)
-    - [🔹  Bucle while](#--bucle-while)
+## Programación en Bash
+
 - [:cyclone:  5. Comparaciones en Bash](#cyclone--5-comparaciones-en-bash)
     - [🔹 `[ ... ]` → Prueba clásica (test)](#-----prueba-clásica-test)
     - [🔹 `[[ ... ]]` → Prueba extendida de Bash](#-----prueba-extendida-de-bash)
@@ -33,11 +23,15 @@
 - [:cyclone:  8. Funciones](#cyclone--8-funciones)
     - [Definición](#definición)
     - [Parámetros especiales](#parámetros-especiales)
-    - [Ejemplo](#ejemplo)
-- [:cyclone:  9. Depuración y Pruebas](#cyclone--9-depuración-y-pruebas)
+    - [Ejemplo](#ejemplo-3)
+  - [9. Depuración y Pruebas](#9-depuración-y-pruebas)
   - [Bibliografía](#bibliografía)
+  - [📦 Operadores y wildcards](#-operadores-y-wildcards)
+  - [Funciones en Bash](#funciones-en-bash)
+  - [Definición de una función](#definición-de-una-función)
+  - [Parámetros](#parámetros)
 
-&nbsp;
+
 
 
 El **scripting** consiste en la creación y ejecución de secuencias de comandos que automatizan tareas, estos  suelen estar escritos en lenguajes de alto nivel como Python, Ruby, Perl, JavaScript o Shell, y permiten agilizar procesos repetitivos. Son fáciles de aprender y usar, se escriben dinámicamente sin necesidad de un archivo de punto de entrada y se pueden ejecutar directamente en una terminal. 
@@ -74,9 +68,25 @@ En GNU/Linux, los scripts suelen tener extensiones como .bash o .sh (no obligato
 - Encadenar aplicaciones mediante pipes.  
 - Mejorar la experiencia de usuario.  
 
-# :cyclone: 2. Variables
+## 2. Variables
+Las ``variables`` en Bash se utilizan para almacenar información que se puede utilizar más adelante en el script. No es necesario declarar el tipo de una variable, solo se asigna un valor.
 
-Las **variables** almacenan datos que pueden usarse y modificarse dentro de un script.
+```bash
+VARIABLE=valor # Define una variable.
+$VARIABLE # Accede al valor de una variable.
+export VARIABLE=valor # Define una variable de entorno.
+
+# Ejemplos:
+VAR=valor        # 💾 Asignar variable
+echo $VAR        # 📢 Mostrar variable
+read VAR         # 🎤 Leer entrada del usuario
+
+nombre="Juan"
+echo "Hola, $nombre"
+```
+
+
+
 
 ### Reglas básicas
 - Se declaran con `nombre=valor` (sin espacios).  
@@ -99,7 +109,7 @@ Las **variables** almacenan datos que pueden usarse y modificarse dentro de un s
 
 > En Bash no es necesario declarar tipo.  
 
-# :cyclone:  3. Operaciones Básicas
+## 3. Operaciones Básicas
 
 | **Operadores aritméticos** | **Operadores lógicos** | **Operadores sobre ficheros** | **Prioridad de operadores** |
 |-----------------------------|------------------------|-------------------------------|------------------------------|
@@ -113,7 +123,7 @@ Las **variables** almacenan datos que pueden usarse y modificarse dentro de un s
 | `++` Incremento            | `-z` nulo              |                               | `||`                         |
 | `--` Decremento            |                        |                               | `=`                          |
 
-# :cyclone:  4. Estructuras de Control
+## 4. Estructuras de Control
 
 ### 🔹  Secuencial
 En la estructura secuencial, las instrucciones se ejecutan una tras otra, en el orden en que aparecen en el script.
@@ -125,20 +135,60 @@ echo "Hola, $nombre"
 echo "Fin del programa"
 ```
 
-### 🔹 Condicional (if-else)
-Permite ejecutar diferentes bloques de código según se cumpla o no una condición.
 ```bash
-#!/bin/bash
-numero=5
-if [ "$numero" -gt 3 ]; then
-  echo "El número es mayor que 3"
+echo "Comenzando script"
+mkdir nuevo_directorio
+echo "Directorio creado"
+```
+
+### ❓ Condicional (if-else)
+
+> #### Estructura Condicional `if`
+
+La estructura `if` permite ejecutar un bloque de comandos si se cumple una condición. Para esa condición se sueles usar:
+
+1. Simples corchetes [ ... ]:
+
+   - Se utilizan para evaluar expresiones condicionales simples son más antiguos y se basan en el comando **test**.
+   - Limitados en cuanto a operadores de comparación y no permiten trabajar con cadenas que contienen espacios sin comillas.
+   - No permiten operaciones de comparación de cadenas con patrones (como == o != con **wildcards**).
+
+2. Dobles corchetes [[...]]:
+   - Permiten el uso de operadores lógicos más avanzados, como &&, || y !.
+   - Son más tolerantes con las cadenas que contienen espacios, ya que no requieren que las variables se citen explícitamente en muchos casos.
+   - Soportan comparaciones de cadenas con patrones, como == y !=, y permiten el uso de comodines (\*, ?).
+3. Operadores comunes: (Ver sección operadores y wildcards)
+    ```bash
+    [ "$a" = "$b" ]     # 📏 Igualdad de cadenas
+    [ "$a" -eq "$b" ]   # 🔢 Igualdad numérica
+    [ -f FILE ]         # 📄 Es un archivo
+    [ -d DIR ]          # 📁 Es un directorio
+    [ -z "$STR" ]       # 🈳 Cadena vacía
+    ```
+
+**Sintaxis**
+
+```bash
+  if [[ condición ]]; then
+      # comandos
+  elif [[ condición ]]; then
+      # comandos alternativos
+  else
+      # comandos alternativos
+  fi
+```
+
+**Ejemplo**
+
+```bash
+numero=10
+if [ $numero -gt 5 ]; then
+    echo "El número es mayor que 5"
 else
-  echo "El número es menor o igual que 3"
+    echo "El número es menor o igual que 5"
 fi
 ```
 
-### 🔹  Condicional (if-elif-else)
-Evalúa varias condiciones en orden hasta que una de ellas se cumple.
 ```bash
 #!/bin/bash
 hora=12
@@ -151,26 +201,139 @@ else
 fi
 ```
 
-### 🔹 Estructura case
-Simplifica la comparación de una variable con varios valores posibles.
+> #### Estructura Condicional `case`
+
+El case se utiliza cuando se desea evaluar múltiples opciones posibles para una variable. Es útil cuando se tienen muchas condiciones que verificar.
+
+**Sintaxis**
+
 ```bash
-#!/bin/bash
-opcion=2
-case "$opcion" in
-  1)
-    echo "Has elegido la opción 1"
-    ;;
-  2)
-    echo "Has elegido la opción 2"
-    ;;
-  3)
-    echo "Has elegido la opción 3"
-    ;;
-  *)
-    echo "Opción no válida"
-    ;;
+case $variable in
+    valor1)
+        # comandos si la variable es igual a valor1
+        ;;
+    valor2)
+        # comandos si la variable es igual a valor2
+        ;;
+    *)
+        # comandos si ninguna opción coincide
+        ;;
 esac
 ```
+
+**Ejemplo**
+
+```bash
+read -p "Elige una opción (a/b): " opcion
+case $opcion in
+    "a")
+        echo "Elegiste A"
+        ;;
+    "b")
+        echo "Elegiste B"
+        ;;
+    *)
+        echo "Opción no válida"
+        ;;
+esac
+```
+
+En este ejemplo, dependiendo del valor de opcion, se ejecuta un bloque de código específico.
+
+## 🔁Estructuras iterativa (bucles)
+
+Permite repetir un conjunto de comandos varias veces, según una condición o una lista de valores. Se usan cuando quieres automatizar tareas repetitivas sin escribir el mismo código una y otra vez.
+
+> ### Estructura iterativa `for`
+
+🔹 Recorre una lista o secuencia de valores.
+
+✔️ Úsalo cuando sabes cuántas veces vas a repetir algo o tienes una lista definida.
+
+#### Sintaxis
+
+```bash
+for variable in {inicio..fin}; do
+    # comandos
+done
+```
+
+#### Ejemplo
+
+```bash
+for i in {1..5}; do
+    echo "Iteración $i"
+done
+# Este bucle imprimirá "Iteración 1", "Iteración 2", hasta "Iteración 5".
+```
+
+```bash
+for archivo in *.txt; do
+  echo "Procesando $archivo"
+done
+```
+
+> ### Estructura iterativa `while` 
+
+🔹 Repite mientras una condición sea verdadera.
+
+✔️ Úsalo cuando no sabes cuántas veces se repetirá y depende de una condición que puede cambiar durante la ejecución.
+
+#### Sintaxis
+
+```bash
+while [ condición ]; do
+    # comandos
+done
+```
+
+#### Ejemplo:
+
+```bash
+contador=1
+while [ $contador -le 3 ]; do
+    echo "Contador: $contador"
+    contador=$((contador + 1))  # ((contador++))
+done
+#Este bucle seguirá ejecutándose mientras la condición sea verdadera. En este caso, imprimirá los valores del contador del 1 al 3.
+```
+
+```bash
+while IFS= read -r linea; do
+    echo "Línea: $linea"
+done < archivo.txt
+
+# El bucle while es comúnmente utilizado para leer archivos línea por línea, especialmente cuando no sabes cuántas líneas tiene el archivo o cuando necesitas realizar operaciones dinámicas en cada línea.
+
+# Recuerda usar `IFS` y `-r` para una lectura más robusta si las líneas contienen espacios o caracteres especiales.
+```
+
+> ### Estructura iterativa `until`
+
+🔹 Repite hasta que una condición sea verdadera (lo opuesto a while).
+
+✔️ Úsalo cuando quieres repetir algo hasta que ocurra una condición.
+
+#### Sintaxis
+
+```bash
+until [ condición ]; do
+    # comandos
+done
+```
+
+#### Ejemplo
+
+```bash
+contador=1
+until [ $contador -gt 3 ]; do
+    echo "Contador: $contador"
+    contador=$((contador + 1)) # ((contador++))
+done
+# Este bucle continuará ejecutándose hasta que la condición se haga verdadera (cuando el contador sea mayor que 3)
+```
+
+
 
 ### 🔹  Bucle for
 
@@ -391,7 +554,7 @@ saludar() {
 saludar "Yeray" "Agüimes"
 ```
 
-# :cyclone:  9. Depuración y Pruebas
+## 9. Depuración y Pruebas
 
 - `bash -x script.sh` → modo debug (muestra ejecución línea a línea).  
 - `bash -n script.sh` → verifica sintaxis sin ejecutar.  
@@ -399,3 +562,89 @@ saludar "Yeray" "Agüimes"
 ## Bibliografía
 - [Programación en Bash](https://github.com/IamJony/Programacion-bash)  
 - [Guía de Bash scripting](https://github.com/Idnan/bash-guide)  
+
+
+
+
+## 📦 Operadores y wildcards
+
+> ### 🔢 Tabla de Operadores Lógicos en Bash
+
+| Operador     | Descripción                                |
+|--------------|---------------------------------------------|
+| `-lt` (<)    | less than (menor que)                       |
+| `-gt` (>)    | greater than (mayor que)                    |
+| `-le` (<=)   | less or equal than (menor o igual que)      |
+| `-ge` (>=)   | greater or equal than (mayor o igual que)   |
+| `-eq` (==)   | equal (igual)                               |
+| `-ne` (!=)   | not equal (distinto)                        |
+| `-n`         | not null (el valor contiene al menos 1 carácter) |
+| `-z`         | null (el valor no contiene ningún carácter) |
+
+> ### 📁 Operadores Condicionales de Ficheros en Bash
+
+| Operador | Descripción                                                  |
+|----------|--------------------------------------------------------------|
+| `-e`     | Verifica si existe el fichero o directorio                   |
+| `-f`     | Verifica si existe el fichero **y NO es** un directorio      |
+| `-s`     | Verifica si el fichero existe **y no está vacío**            |
+| `-d`     | Verifica si **es un directorio**                             |
+| `-r`     | Verifica si el fichero/directorio tiene **permisos de lectura** |
+| `-w`     | Verifica si tiene **permisos de escritura**                  |
+| `-x`     | Verifica si tiene **permisos de ejecución**                  |
+
+> ### 📎 Tabla de Wildcards en Bash
+
+| Comodín | Significado                                 | Ejemplo             | Coincidencias típicas             |
+|---------|---------------------------------------------|---------------------|-----------------------------------|
+| `*`     | Cualquier cantidad de caracteres (incluido ninguno) | `*.txt`             | `nota.txt`, `resumen.txt`, etc.   |
+| `?`     | Un solo carácter (cualquiera)               | `archivo?.log`      | `archivo1.log`, `archivoA.log`    |
+| `[abc]` | Un solo carácter que sea `a`, `b` o `c`     | `file[123].txt`     | `file1.txt`, `file2.txt`, etc.    |
+| `[a-z]` | Un solo carácter en ese rango               | `letra[a-z].sh`     | `letraa.sh`, `letrab.sh`, etc.    |
+| `[!abc]` o `[^abc]` | Cualquier carácter excepto `a`, `b` o `c` | `file[!0-9].txt`     | `filea.txt`, `file_.txt`, etc.    |
+| `{uno,dos}` | Expansión de lista, separado por comas  | `echo {uno,dos}`    | `uno dos` (expande ambas opciones)|
+| `{1..3}` | Expansión de rango numérico o alfabético   | `file{1..3}.txt`    | `file1.txt`, `file2.txt`, `file3.txt` |
+| `**`    | Recursivo (si `shopt -s globstar`)          | `**/*.txt`          | Todos los `.txt` en subdirectorios |
+
+> 🔧 **Nota**: La expansión `**` solo funciona si activas `globstar`:
+```bash
+shopt -s globstar
+```
+## Funciones en Bash
+
+Las funciones en Bash permiten agrupar un conjunto de comandos bajo un mismo nombre para poder reutilizarlos en diferentes partes de un script. Esto ayuda a organizar el código, evitar repeticiones y facilitar su mantenimiento.
+
+## Definición de una función
+
+Para definir una función en Bash, se utiliza la siguiente sintaxis:
+```bash
+nombre_funcion() {
+    # Comandos que realiza la función
+}
+```
+```bash
+mi_funcion() {
+    echo "Hola desde la función"
+}
+```
+Una vez definida la función, puedes llamarla en cualquier lugar del script simplemente escribiendo su nombre:
+```bash
+mi_funcion
+```
+La salida de este script será:
+- Hola desde la función
+
+
+## Parámetros
+Puedes pasar parámetros a una función al momento de llamarla. Los parámetros se acceden dentro de la función a través de $1, $2, $3, etc., que representan el primer, segundo y tercer parámetro, respectivamente.
+Ejemplo con parámetros:
+```bash
+saludar() {
+    echo "Hola, $1"
+}
+```
+```bash
+saludar "Juan"
+```
+En este ejemplo, la función saludar toma un argumento (en este caso, el nombre "Juan") y lo imprime con un mensaje. La salida sería:
+- Hola, Juan
