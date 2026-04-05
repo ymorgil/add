@@ -1,18 +1,3 @@
-- [Visual Studio Code usando WSL y Docker](#visual-studio-code-usando-wsl-y-docker)
-  - [Extensiones necesarias en Visual Studio Code para trabajar con Docker y WSL](#extensiones-necesarias-en-visual-studio-code-para-trabajar-con-docker-y-wsl)
-- [1. Ejecutar Visual Studio Code en Ubuntu (WSL)](#1-ejecutar-visual-studio-code-en-ubuntu-wsl)
-  - [1.1 Abrir Ubuntu (WSL)](#11-abrir-ubuntu-wsl)
-  - [1.2 Ir al directorio de trabajo](#12-ir-al-directorio-de-trabajo)
-  - [1.3 Abrir Visual Studio Code desde Ubuntu](#13-abrir-visual-studio-code-desde-ubuntu)
-  - [1.4 Comprobar que Docker funciona](#14-comprobar-que-docker-funciona)
-- [2. Uso de contenedores Docker desde Visual Studio Code](#2-uso-de-contenedores-docker-desde-visual-studio-code)
-  - [2.1 Crear un proyecto Python](#21-crear-un-proyecto-python)
-  - [2.2 Crear un script Python](#22-crear-un-script-python)
-  - [2.3 Crear un Dockerfile](#23-crear-un-dockerfile)
-  - [2.4 Construir la imagen](#24-construir-la-imagen)
-  - [2.5 Ejecutar el contenedor](#25-ejecutar-el-contenedor)
-- [Resumen](#resumen)
-
 # Visual Studio Code usando WSL y Docker
 
 Una vez instalado **WSL**, configurado **Ubuntu** y teniendo **Docker Desktop** integrado con **Visual Studio Code**, el siguiente paso es trabajar directamente desde el entorno Linux y comenzar a ejecutar contenedores.

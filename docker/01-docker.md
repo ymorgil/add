@@ -1,30 +1,4 @@
-- [🐳 Instalación de Docker + WSL + Portainer en Windows](#-instalación-de-docker--wsl--portainer-en-windows)
-- [👉 Paso 1: Activar características de Windows (WSL)](#-paso-1-activar-características-de-windows-wsl)
-- [👉 Paso 2: Instalación de WSL + Ubuntu 24.04](#-paso-2-instalación-de-wsl--ubuntu-2404)
-  - [Powershell](#powershell)
-  - [Descargar terminal](#descargar-terminal)
-  - [Actualizar Ubuntu](#actualizar-ubuntu)
-- [👉 Paso 3: Instalación de Docker Desktop + integración con WSL](#-paso-3-instalación-de-docker-desktop--integración-con-wsl)
-    - [3.1 Instalar Docker Desktop con winget en Windows](#31-instalar-docker-desktop-con-winget-en-windows)
-    - [3.2 Abrir Docker Desktop](#32-abrir-docker-desktop)
-    - [Comprobar Docker desde Ubuntu](#comprobar-docker-desde-ubuntu)
-- [👉 Paso 4: Portainer](#-paso-4-portainer)
-    - [Instalar Portainer](#instalar-portainer)
-- [Trabajo con Docker en Visual Studio Code usando WSL](#trabajo-con-docker-en-visual-studio-code-usando-wsl)
-- [1. Ejecutar Visual Studio Code en Ubuntu (WSL)](#1-ejecutar-visual-studio-code-en-ubuntu-wsl)
-  - [1.1 Abrir Ubuntu (WSL)](#11-abrir-ubuntu-wsl)
-  - [1.2 Ir al directorio de trabajo](#12-ir-al-directorio-de-trabajo)
-  - [1.3 Abrir Visual Studio Code desde Ubuntu](#13-abrir-visual-studio-code-desde-ubuntu)
-  - [1.4 Comprobar que Docker funciona](#14-comprobar-que-docker-funciona)
-- [2. Uso de contenedores Docker desde Visual Studio Code](#2-uso-de-contenedores-docker-desde-visual-studio-code)
-  - [2.1 Crear un proyecto Python](#21-crear-un-proyecto-python)
-  - [2.2 Crear un script Python](#22-crear-un-script-python)
-  - [2.3 Crear un Dockerfile](#23-crear-un-dockerfile)
-  - [2.4 Construir la imagen](#24-construir-la-imagen)
-  - [2.5 Ejecutar el contenedor](#25-ejecutar-el-contenedor)
-- [Resumen](#resumen)
-
-> # 🐳 Instalación de Docker + WSL + Portainer en Windows
+# 🐳 Instalación de Docker + WSL + Portainer en Windows
 
 Guía paso a paso para preparar un entorno con WSL, Ubuntu 24.04, Docker Desktop y Portainer.
 
