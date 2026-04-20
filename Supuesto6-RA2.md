@@ -1,5 +1,5 @@
 ---
-title: "Supuesto UT06-RA02 Gestión de Procesos en Sistemas Operativos"
+title: "Supuesto UT06-RA02"
 weight: 1
 ---
 
