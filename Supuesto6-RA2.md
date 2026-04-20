@@ -1,3 +1,8 @@
+---
+title: "Supuesto UT06-RA02 Gestión de Procesos en Sistemas Operativos"
+weight: 1
+---
+
 # Gestión de Procesos en Sistemas Operativos
 
 En esta práctica vas a construir y analizar una infraestructura real de contenedores sobre Windows utilizando WSL2 y Docker. A lo largo de los apartados irás desde la instalación del entorno hasta el análisis profundo de cómo el sistema operativo gestiona los procesos que hay detrás de cada contenedor, relacionando lo que ocurre dentro de Linux con lo que es visible desde Windows. El objetivo no es solo que el stack funcione, sino que entiendas qué está pasando a nivel de procesos en cada momento.
